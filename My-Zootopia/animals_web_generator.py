@@ -19,22 +19,25 @@ animals_output = ""
 
 for animal in animals_data:
     animals_output += '<li class="cards__item">\n'
+
     if "name" in animal:
-        animals_output += f"Name: {animal['name']}<br/>\n"
+        animals_output += f'  <div class="card__title">{animal["name"]}</div>\n'
+
+    animals_output += '  <p class="card__text">\n'
 
     if "characteristics" in animal and "diet" in animal["characteristics"]:
-        animals_output += f"Diet: {animal['characteristics']['diet']}<br/>\n"
+        animals_output += f'      <strong>Diet:</strong> {animal["characteristics"]["diet"]}<br/>\n'
 
     if "locations" in animal and len(animal["locations"]) > 0:
-        animals_output += f"Location: {animal['locations'][0]}<br/>\n"
+        animals_output += f'      <strong>Location:</strong> {animal["locations"][0]}<br/>\n'
 
     if "type" in animal:
-        animals_output += f"Type: {animal['type']}<br/>\n"
+        animals_output += f'      <strong>Type:</strong> {animal["type"]}<br/>\n'
+
+    animals_output += '  </p>\n'
     animals_output += '</li>\n'
 
 final_html = template_html.replace("__REPLACE_ANIMALS_INFO__", animals_output)
 
 with open("animals.html", "w") as file:
     file.write(final_html)
-
-print(final_html)
